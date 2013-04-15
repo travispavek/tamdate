@@ -71,15 +71,29 @@ if [[ -n $INCTAMMONTH ]]; then
 fi
 
 if [[ -n $INCTAMWEEKDAY ]]; then
-        echo -n $TAMWEEKDAY
+        echo -n "$TAMWEEKDAY,"
         if [[ -n $INCTAMMONTH ]]; then
                 echo -n " "
         fi
 fi
+echo -n "$DAY"
+
+case $DAY in
+        1 )  echo -n "st" ;;
+        2 )  echo -n "nd" ;;
+        3 )  echo -n "rd" ;;
+        21 ) echo -n "st" ;;
+        22 ) echo -n "nd" ;;
+        23 ) echo -n "rd" ;;
+        31 ) echo -n "st" ;;
+        * ) echo -n "th" ;;
+esac
+
+echo -n " of "
+
 if [[ -n $INCTAMMONTH ]]; then
-        echo -n $TAMMONTH
+        echo $TAMMONTH
 fi
-echo " $DAY"
 
 if [[ -z $INCHOLIDAY ]]; then
         exit 0
