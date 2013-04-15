@@ -71,11 +71,9 @@ if [[ -n $INCTAMMONTH ]]; then
 fi
 
 if [[ -n $INCTAMWEEKDAY ]]; then
-        echo -n "$TAMWEEKDAY,"
-        if [[ -n $INCTAMMONTH ]]; then
-                echo -n " "
-        fi
+        echo -n "$TAMWEEKDAY, "
 fi
+
 echo -n "$DAY"
 
 case $DAY in
@@ -89,11 +87,12 @@ case $DAY in
         * ) echo -n "th" ;;
 esac
 
-echo -n " of "
 
 if [[ -n $INCTAMMONTH ]]; then
-        echo $TAMMONTH
+        echo -n " of $TAMMONTH"
 fi
+
+echo ""
 
 if [[ -z $INCHOLIDAY ]]; then
         exit 0
