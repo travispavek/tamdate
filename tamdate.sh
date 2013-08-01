@@ -64,9 +64,10 @@ fi
 # Convert month
 if [[ -n $INCTAMMONTH ]]; then
         TM=( "Morning Star" "Sun's Dawn" "First Seed" "Rain's Hand"
-                "Second Seed" Midyear "Sun's Height" "Last Seed"
-                Hearthfire Frostfall "Sun's Dusk" "Evening Star" )
-        MONTH=$(($MONTH - 1));
+                "Second Seed" "Midyear" "Sun's Height" "Last Seed"
+                "Hearthfire" "Frostfall" "Sun's Dusk" "Evening Star" )
+        
+        MONTH=$((10#$MONTH - 1));
         TAMMONTH=${TM[$MONTH]}
 fi
 
