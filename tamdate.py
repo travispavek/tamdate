@@ -10,7 +10,7 @@ month_name = {'January': 'Morning Star',
               'June': 'Mid Year',
               'July': "Sun's Height",
               'August': 'Last Seed',
-              'Suptember': 'Hearthfire',
+              'September': 'Hearthfire',
               'October': 'Frostfall',
               'November': "Sun's Dusk",
               'December': 'Evening Star'}
