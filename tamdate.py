@@ -2,7 +2,7 @@
 
 import time
 from datetime import datetime
-import argparse
+from optparse import OptionParser
 
 month_name = {'January': 'Morning Star',
               'February': "Sun's Dawn",
@@ -40,7 +40,7 @@ def convert_date(date=None):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--date", action="store", dest="date", help="specify date to convert, format DD-MM-YYYY")
-    args = parser.parse_args()  
-    convert_date(args.date)
+    parser = OptionParser()
+    parser.add_option("--date", action="store", dest="date", help="specify date to convert, format DD-MM-YYYY")
+    opts, args = parser.parse_args()  
+    convert_date(opts.date)
