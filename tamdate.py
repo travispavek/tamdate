@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 import time
+from datetime import datetime
+import argparse
 
 month_name = {'January': 'Morning Star',
               'February': "Sun's Dawn",
@@ -30,10 +32,15 @@ def append_suffix(d):
 def convert_date(date=None):
     if date == None:
         date = time.strftime('%A %d %B').split()
+    else:
+        date = datetime.strptime(date, '%d-%m-%Y').strftime('%A %d %B').split()
     template = '{0}, {1} of {2}'
     print template.format(weekday_name[date[0]], 
         append_suffix(int(str(date[1]).lstrip('0'))), month_name[date[2]])
 
 
 if __name__ == "__main__":
-    convert_date()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--date", action="store", dest="date", help="specify date to convert, format DD-MM-YYYY")
+    args = parser.parse_args()  
+    convert_date(args.date)
