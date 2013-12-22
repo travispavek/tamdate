@@ -120,7 +120,7 @@ def tamriellic(date, game):
     except:
         tamriel['hday'] = None
         tamriel['hdesc'] = None
-        tamriel['year'] = es_year(date, game)
+    tamriel['year'] = es_year(date, game)
     return tamriel
 
 
