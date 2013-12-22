@@ -153,7 +153,8 @@ if __name__ == "__main__":
 
     # Create the time struct
     if opts.date:
-        tamriel = tamriellic(datetime.strptime(opts.date, '%d-%m-%Y'), opts.game)
+        tamriel = tamriellic(datetime.strptime(opts.date, '%d-%m-%Y'),
+                             opts.game)
     else:
         tamriel = tamriellic(time, opts.game)
 
