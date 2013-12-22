@@ -4,6 +4,12 @@ import time
 from datetime import datetime
 from optparse import OptionParser
 
+es_game = {'arena': {'era': 3, 'year': 399, 'release': 1994},
+           'daggerfall': {'era': 3, 'year': 405, 'release': 1996},
+           'morrowind': {'era': 3, 'year': 427, 'release': 2002},
+           'oblivion': {'era': 3, 'year': 433, 'release': 2006},
+           'skyrim': {'era': 4, 'year': 201, 'release': 2011}}
+
 month = {'January': 'Morning Star',
          'February': "Sun's Dawn",
          'March': 'First Seed',
@@ -90,7 +96,20 @@ def mday(day):
     return str(day)+suffix
 
 
-def tamriellic(date):
+def es_year(date, game):
+    if not game:
+        return ''
+    game = es_game[game.lower()]
+    game['year'] = game['year'] + int(date.strftime('%Y')) - game['release']
+
+    if game['era'] is 3 and game['year'] > 433:
+        game['era'] = 4
+        game['year'] = game['year'] - 433
+
+    return '{era}E {year}'.format(**game)
+
+
+def tamriellic(date, game):
     tamriel = dict()
     tamriel['mday'] = mday(date.strftime('%d'))
     tamriel['month'] = month[date.strftime('%B')]
@@ -101,6 +120,7 @@ def tamriellic(date):
     except:
         tamriel['hday'] = None
         tamriel['hdesc'] = None
+        tamriel['year'] = es_year(date, game)
     return tamriel
 
 
@@ -124,20 +144,24 @@ if __name__ == "__main__":
                       dest="hdesc",
                       default=False,
                       help="Print holiday description")
+    parser.add_option("--game",
+                      action="store",
+                      dest="game",
+                      help="Elder Scrolls game, used to generate year")
 
     opts, args = parser.parse_args()
 
     # Create the time struct
     if opts.date:
-        tamriel = tamriellic(datetime.strptime(opts.date, '%d-%m-%Y'))
+        tamriel = tamriellic(datetime.strptime(opts.date, '%d-%m-%Y'), opts.game)
     else:
-        tamriel = tamriellic(time)
+        tamriel = tamriellic(time, opts.game)
 
     if opts.template:
         print opts.template.format(**tamriel)
     else:
         if opts.holiday and tamriel['hday']:
             print tamriel['hday']
-        print '{wday}, {mday} of {month}'.format(**tamriel)
+        print '{wday}, {mday} of {month} {year}'.format(**tamriel)
         if opts.hdesc and tamriel['hdesc']:
             print '\n'+tamriel['hdesc']
