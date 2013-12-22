@@ -151,10 +151,13 @@ if __name__ == "__main__":
 
     opts, args = parser.parse_args()
 
-    # Create the time struct
     if opts.date:
-        tamriel = tamriellic(datetime.strptime(opts.date, '%d-%m-%Y'),
-                             opts.game)
+        try:
+            tamriel = tamriellic(datetime.strptime(opts.date, '%d-%m-%Y'),
+                                 opts.game)
+        except ValueError:
+            print "date must be in the following format: DD-MM-YYYY"
+            exit(1)
     else:
         tamriel = tamriellic(time, opts.game)
 
