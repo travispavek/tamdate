@@ -84,7 +84,7 @@ holiday = {'01-01': {'name': 'New Life Festival', 'desc': "Today the people of T
            '15-12': {'name': "North Wind's Prayer", 'desc': "Today is the 15th of Evening Star, a holiday reverently observed by the temples as North Wind's Prayer. It is a thanksgiving to the Gods for a good harvest and a mild winter. The temples offer all their services blessing, curing, healing for half the donation usually requested."},
            '18-12': {'name': "Baranth Do is celebrated on the 18th of Evening. Star by the Redguards of the Alik'r Desert. Its meaning is \"Goodbye to the Beast of Last Year\". Pageants featuring demonic representations of the old year are popular, and revelry to honor the new year is everywhere."},
            '21-12': {'name': "Chil'a", 'desc': "Chil'a, the blessing of the new year in the barony of Kairou, is both a sacred day and a festival. The archpriest and the baroness each consecrate the ashes of the old year in solemn ceremony, then street parades, balls, and tournaments conclude the event."},
-           '25-12': {'name': "The New Life festival comes a few days early in Wayrest with Saturalia, traditionally held on the 25th of Evening Star. Originally a holiday for a long forgotten god of debauchery, it has become a time of gift giving, parties, and parading. Visitors are encouraged to participate."},
+           '25-12': {'name': 'New Life Festival [Wayrest]', 'desc': "The New Life festival comes a few days early in Wayrest with Saturalia, traditionally held on the 25th of Evening Star. Originally a holiday for a long forgotten god of debauchery, it has become a time of gift giving, parties, and parading. Visitors are encouraged to participate."},
            '30-12': {'name': 'Old Life', 'desc': "On the last day of the year the Empire celebrates the holiday called Old Life. Many go to the temples to reflect on their past. Some go for more than this, for it is rumored that priests will, as the last act of the year, perform resurrections on beloved friends and family members free of the usual charge. Worshippers know better than to expect this philanthropy, but they arrive in a macabre procession with the recently deceased nevertheless."}}
 
 
@@ -166,6 +166,11 @@ if __name__ == "__main__":
     else:
         if opts.holiday and tamriel['hday']:
             print tamriel['hday']
-        print '{wday}, {mday} of {month} {year}'.format(**tamriel)
+
+        if opts.game:
+            print '{wday}, {mday} of {month}, {year}'.format(**tamriel)
+        else:
+            print '{wday}, {mday} of {month}'.format(**tamriel)
+
         if opts.hdesc and tamriel['hdesc']:
             print '\n'+tamriel['hdesc']
