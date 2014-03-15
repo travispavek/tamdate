@@ -111,7 +111,7 @@ def es_year(date, game):
 
 def tamriellic(date, game):
     tamriel = dict()
-    tamriel['mday'] = mday(date.strftime('%d'))
+    tamriel['mday'] = mday(date.strftime('%-d'))
     tamriel['month'] = month[date.strftime('%B')]
     tamriel['wday'] = weekday[date.strftime('%A')]
     try:
